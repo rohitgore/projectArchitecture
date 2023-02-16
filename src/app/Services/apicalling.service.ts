@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,12 @@ export class ApicallingService {
   };
 
 // Get API calling
-  apiGet(url:any):Observable<any>
+  apiGet(url1:any):Observable<any>
 {
-   return this.http.get<any>(url).pipe(retry(1), catchError(this.handleError));
+ let url = environment[url1 as keyof typeof environment];
+  console.log(url);
+  return this.http.get<any>(environment.apiProtocol + environment.apiHost + url).pipe(retry(1), catchError(this.handleError));
+  
 }
 
 // Error handling
