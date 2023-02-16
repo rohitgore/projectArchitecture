@@ -10,14 +10,24 @@ export class AppComponent {
   constructor(private ap:ApicallingService ){}
   title = 'setupApplication';
   url = 'http://localhost:3000/Person';
+  
 
   getdata()
   {
-    this.ap.apiGet(this.url).subscribe(
+    this.ap.apiGet('personDataAPI').subscribe(
+      res=>{
+        console.log(res);
+      }
+    )
+
+    this.ap.apiGet('employeeDataAPI').subscribe(
       res=>{
         console.log(res);
       }
     )
   }
 
+  
+
+ 
 }
